@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Nisha Puri — Growth & Lead Generation</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --cream: #F9F5EF;
+    --ink: #1A1208;
+    --terracotta: #C4622D;
+    --gold: #D4A847;
+    --sage: #7A8C6E;
+    --warm-gray: #8C8070;
+    --card-bg: #FFFFFF;
+    --border: rgba(26,18,8,0.1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 4rem;
+    background: rgba(249,245,239,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--warm-gray);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--terracotta); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 8rem 4rem 4rem;
+    gap: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -10%; right: -5%;
+    width: 55vw; height: 55vw;
+    background: radial-gradient(circle, rgba(196,98,45,0.08) 0%, transparent 65%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    font-size: 0.78rem; font-weight: 600;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 1.5rem;
+    opacity: 0; animation: fadeUp 0.7s 0.1s forwards;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block; width: 2rem; height: 2px;
+    background: var(--terracotta);
+  }
+  .hero-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.5rem, 6vw, 5.5rem);
+    font-weight: 900;
+    line-height: 1.0;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    opacity: 0; animation: fadeUp 0.7s 0.2s forwards;
+  }
+  .hero-name em {
+    font-style: italic;
+    color: var(--terracotta);
+  }
+  .hero-tagline {
+    margin-top: 1.5rem;
+    font-size: 1.1rem;
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--warm-gray);
+    max-width: 480px;
+    opacity: 0; animation: fadeUp 0.7s 0.35s forwards;
+  }
+  .hero-cta {
+    margin-top: 2.5rem;
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    opacity: 0; animation: fadeUp 0.7s 0.5s forwards;
+  }
+  .btn-primary {
+    display: inline-block;
+    padding: 0.85rem 2rem;
+    background: var(--terracotta);
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .btn-primary:hover { background: #a84f24; transform: translateY(-2px); }
+  .btn-outline {
+    display: inline-block;
+    padding: 0.85rem 2rem;
+    border: 1.5px solid var(--ink);
+    color: var(--ink);
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+  .btn-outline:hover { background: var(--ink); color: var(--cream); transform: translateY(-2px); }
+
+  /* hero right — stats card */
+  .hero-right {
+    opacity: 0; animation: fadeUp 0.8s 0.4s forwards;
+  }
+  .stats-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+  }
+  .stat-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2rem 1.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .stat-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(26,18,8,0.08); }
+  .stat-card::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+    background: var(--terracotta);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .stat-card:hover::after { transform: scaleX(1); }
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .stat-number span { color: var(--terracotta); }
+  .stat-label {
+    margin-top: 0.5rem;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    color: var(--warm-gray);
+    text-transform: uppercase;
+  }
+  .stat-card.accent { background: var(--ink); }
+  .stat-card.accent .stat-number { color: var(--gold); }
+  .stat-card.accent .stat-label { color: rgba(249,245,239,0.6); }
+
+  /* ── SECTIONS ── */
+  section { padding: 6rem 4rem; }
+  .section-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 0.75rem;
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+  .section-label::before {
+    content: ''; display: block;
+    width: 1.5rem; height: 2px; background: var(--terracotta);
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 3rem;
+  }
+
+  /* ── EXPERIENCE ── */
+  #experience { background: var(--ink); }
+  #experience .section-label { color: var(--gold); }
+  #experience .section-label::before { background: var(--gold); }
+  #experience .section-title { color: var(--cream); }
+
+  .exp-timeline { display: flex; flex-direction: column; gap: 2rem; }
+  .exp-card {
+    background: rgba(249,245,239,0.04);
+    border: 1px solid rgba(249,245,239,0.1);
+    border-radius: 4px;
+    padding: 2.5rem;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 2rem;
+    transition: background 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .exp-card::before {
+    content: '';
+    position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+    background: var(--terracotta);
+    transform: scaleY(0); transform-origin: top;
+    transition: transform 0.4s;
+  }
+  .exp-card:hover { background: rgba(249,245,239,0.07); }
+  .exp-card:hover::before { transform: scaleY(1); }
+  .exp-meta {}
+  .exp-period {
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .exp-company {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--cream);
+    margin-top: 0.4rem;
+  }
+  .exp-role {
+    font-size: 0.82rem;
+    color: rgba(249,245,239,0.5);
+    margin-top: 0.2rem;
+  }
+  .exp-badge {
+    display: inline-block;
+    margin-top: 0.8rem;
+    padding: 0.2rem 0.6rem;
+    background: rgba(196,98,45,0.2);
+    border: 1px solid rgba(196,98,45,0.4);
+    border-radius: 2px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+  }
+  .exp-content {}
+  .exp-highlights {
+    list-style: none;
+    display: flex; flex-direction: column; gap: 0.7rem;
+  }
+  .exp-highlights li {
+    font-size: 0.92rem;
+    font-weight: 300;
+    color: rgba(249,245,239,0.75);
+    line-height: 1.6;
+    padding-left: 1.2rem;
+    position: relative;
+  }
+  .exp-highlights li::before {
+    content: '→';
+    position: absolute; left: 0;
+    color: var(--terracotta);
+    font-size: 0.85rem;
+  }
+  .exp-highlights li strong {
+    color: var(--cream);
+    font-weight: 600;
+  }
+  .exp-tools {
+    margin-top: 1.2rem;
+    display: flex; flex-wrap: wrap; gap: 0.4rem;
+  }
+  .tool-tag {
+    padding: 0.2rem 0.65rem;
+    background: rgba(249,245,239,0.06);
+    border: 1px solid rgba(249,245,239,0.12);
+    border-radius: 2px;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: rgba(249,245,239,0.5);
+  }
+
+  /* ── SKILLS ── */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .skill-block {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2rem;
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .skill-block:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(26,18,8,0.07); }
+  .skill-icon {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+  .skill-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.75rem;
+  }
+  .skill-list {
+    list-style: none;
+    display: flex; flex-direction: column; gap: 0.35rem;
+  }
+  .skill-list li {
+    font-size: 0.83rem;
+    color: var(--warm-gray);
+    padding-left: 1rem;
+    position: relative;
+  }
+  .skill-list li::before {
+    content: '·';
+    position: absolute; left: 0;
+    color: var(--terracotta);
+    font-weight: 700;
+    font-size: 1.1rem;
+    line-height: 1.3;
+  }
+
+  /* ── TOOLS ── */
+  #tools { background: #F2ECE3; }
+  .tools-row {
+    display: flex; flex-wrap: wrap; gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  .tools-row:last-child { margin-bottom: 0; }
+  .tool-pill {
+    display: flex; align-items: center; gap: 0.5rem;
+    padding: 0.6rem 1.2rem;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--ink);
+    transition: all 0.2s;
+  }
+  .tool-pill:hover {
+    background: var(--terracotta);
+    color: #fff;
+    border-color: var(--terracotta);
+    transform: translateY(-2px);
+  }
+  .tool-pill-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--sage);
+    flex-shrink: 0;
+    transition: background 0.2s;
+  }
+  .tool-pill:hover .tool-pill-dot { background: rgba(255,255,255,0.6); }
+
+  /* ── EDUCATION & LANGUAGES ── */
+  .edu-lang-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+  .info-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2rem;
+  }
+  .info-card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .edu-degree {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .edu-uni {
+    font-size: 0.88rem;
+    color: var(--terracotta);
+    font-weight: 500;
+    margin-top: 0.3rem;
+  }
+  .edu-year {
+    font-size: 0.78rem;
+    color: var(--warm-gray);
+    margin-top: 0.2rem;
+    letter-spacing: 0.05em;
+  }
+  .lang-list { display: flex; flex-direction: column; gap: 0.75rem; }
+  .lang-item { display: flex; align-items: center; justify-content: space-between; }
+  .lang-name { font-size: 0.9rem; font-weight: 500; color: var(--ink); }
+  .lang-level {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.15rem 0.6rem;
+    border-radius: 100px;
+    background: rgba(196,98,45,0.1);
+    color: var(--terracotta);
+  }
+
+  /* ── CONTACT ── */
+  #contact {
+    background: var(--ink);
+    text-align: center;
+  }
+  #contact .section-label { justify-content: center; }
+  #contact .section-title { color: var(--cream); }
+  .contact-sub {
+    font-size: 1rem;
+    font-weight: 300;
+    color: rgba(249,245,239,0.55);
+    margin-bottom: 3rem;
+  }
+  .contact-links {
+    display: flex; justify-content: center; flex-wrap: wrap; gap: 1.5rem;
+  }
+  .contact-item {
+    display: flex; align-items: center; gap: 0.6rem;
+    text-decoration: none;
+    color: rgba(249,245,239,0.7);
+    font-size: 0.9rem;
+    font-weight: 400;
+    transition: color 0.2s;
+  }
+  .contact-item:hover { color: var(--gold); }
+  .contact-icon {
+    width: 36px; height: 36px;
+    background: rgba(249,245,239,0.06);
+    border: 1px solid rgba(249,245,239,0.12);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.9rem;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .contact-item:hover .contact-icon {
+    background: rgba(212,168,71,0.15);
+    border-color: var(--gold);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 1.5rem 4rem;
+    background: #0F0B05;
+    text-align: center;
+    font-size: 0.75rem;
+    color: rgba(249,245,239,0.25);
+    letter-spacing: 0.06em;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .reveal {
+    opacity: 0; transform: translateY(28px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 2rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; padding: 7rem 2rem 4rem; gap: 3rem; }
+    .hero::before { display: none; }
+    section { padding: 4rem 2rem; }
+    .exp-card { grid-template-columns: 1fr; gap: 1rem; }
+    .skills-grid { grid-template-columns: 1fr 1fr; }
+    .edu-lang-grid { grid-template-columns: 1fr; }
+    footer { padding: 1.5rem 2rem; }
+  }
+  @media (max-width: 600px) {
+    .skills-grid { grid-template-columns: 1fr; }
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">NP</a>
+  <ul class="nav-links">
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#tools">Tools</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-left">
+    <div class="hero-eyebrow">B2B Lead Generation & Growth Operations</div>
+    <h1 class="hero-name">Nisha<br/><em>Puri</em></h1>
+    <p class="hero-tagline">
+      Growth-focused professional with 2+ years in EdTech partnerships — scaling lead funnels, onboarding institutions, and driving revenue through data-driven operations.
+    </p>
+    <div class="hero-cta">
+      <a href="#experience" class="btn-primary">View My Work</a>
+      <a href="#contact" class="btn-outline">Get In Touch</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-number">12<span>L+</span></div>
+        <div class="stat-label">Qualified Leads Generated</div>
+      </div>
+      <div class="stat-card accent">
+        <div class="stat-number">10K<span>+</span></div>
+        <div class="stat-label">Schools Onboarded</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">3<span>x</span></div>
+        <div class="stat-label">School Productivity Increase</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">₹2<span>L+</span></div>
+        <div class="stat-label">MRR Contributed (2023)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">Career Journey</div>
+  <h2 class="section-title">Work Experience</h2>
+  <div class="exp-timeline">
+
+    <div class="exp-card reveal">
+      <div class="exp-meta">
+        <div class="exp-period">Jun 2023 – Present</div>
+        <div class="exp-company">Infinity Learn / Wizklub</div>
+        <div class="exp-role">Senior Associate</div>
+        <div class="exp-badge">🏆 Growth Champion JFM 2023</div>
+      </div>
+      <div class="exp-content">
+        <ul class="exp-highlights">
+          <li>Generated <strong>12L+ qualified leads</strong> through national-level B2B initiatives</li>
+          <li>Onboarded <strong>10,000+ schools</strong> for EdTech solution adoption across India</li>
+          <li>Increased school productivity from <strong>90 → 300+ leads per institution</strong> (3x growth)</li>
+          <li>Executed lead programs across <strong>1,000+ schools</strong> nationwide</li>
+          <li>Contributed to <strong>₹2L+ MRR</strong> in 2023 through strategic lead conversion</li>
+          <li>Managed complete <strong>lead lifecycle</strong>: acquisition → qualification → handover</li>
+          <li>Implemented <strong>MIS tracking</strong> to monitor and optimize funnel performance</li>
+          <li>Cross-collaborated with sales, product, and operations teams</li>
+        </ul>
+        <div class="exp-tools">
+          <span class="tool-tag">Inmobius</span>
+          <span class="tool-tag">HOTS</span>
+          <span class="tool-tag">AMS</span>
+          <span class="tool-tag">WIT</span>
+          <span class="tool-tag">SCORE</span>
+          <span class="tool-tag">GDT</span>
+          <span class="tool-tag">MIS Dashboards</span>
+          <span class="tool-tag">Excel</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-card reveal">
+      <div class="exp-meta">
+        <div class="exp-period">Jan 2023 – Jun 2023</div>
+        <div class="exp-company">BYJU'S</div>
+        <div class="exp-role">Business Development Executive</div>
+      </div>
+      <div class="exp-content">
+        <ul class="exp-highlights">
+          <li>Identified business opportunities through <strong>targeted market research</strong></li>
+          <li>Supported B2B outreach and <strong>stakeholder engagement</strong> across segments</li>
+          <li>Assisted growth and expansion initiatives with the <strong>internal teams</strong></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">Capabilities</div>
+  <h2 class="section-title">Core Skills</h2>
+  <div class="skills-grid">
+    <div class="skill-block reveal">
+      <div class="skill-icon">🎯</div>
+      <div class="skill-title">Lead Generation & Funnels</div>
+      <ul class="skill-list">
+        <li>B2B Lead Generation (MQL → SQL)</li>
+        <li>Funnel Design & Optimization</li>
+        <li>Lead Lifecycle Management</li>
+        <li>Qualification & Handover</li>
+      </ul>
+    </div>
+    <div class="skill-block reveal">
+      <div class="skill-icon">📈</div>
+      <div class="skill-title">Growth Operations</div>
+      <ul class="skill-list">
+        <li>Revenue Support & MRR Growth</li>
+        <li>MIS Reporting & Analytics</li>
+        <li>Funnel Performance Tracking</li>
+        <li>Data-Driven Decision Making</li>
+      </ul>
+    </div>
+    <div class="skill-block reveal">
+      <div class="skill-icon">🏫</div>
+      <div class="skill-title">Institutional Partnerships</div>
+      <ul class="skill-list">
+        <li>School & Institution Onboarding</li>
+        <li>EdTech Solution Adoption</li>
+        <li>National-Level B2B Initiatives</li>
+        <li>Stakeholder Engagement</li>
+      </ul>
+    </div>
+    <div class="skill-block reveal">
+      <div class="skill-icon">🤝</div>
+      <div class="skill-title">Cross-Functional Work</div>
+      <ul class="skill-list">
+        <li>Sales & Ops Collaboration</li>
+        <li>Product Team Coordination</li>
+        <li>Market Research</li>
+        <li>Business Development</li>
+      </ul>
+    </div>
+    <div class="skill-block reveal">
+      <div class="skill-icon">📊</div>
+      <div class="skill-title">Reporting & Analytics</div>
+      <ul class="skill-list">
+        <li>MIS Dashboard Management</li>
+        <li>Excel Reporting</li>
+        <li>Funnel Analytics</li>
+        <li>Performance Optimization</li>
+      </ul>
+    </div>
+    <div class="skill-block reveal">
+      <div class="skill-icon">🚀</div>
+      <div class="skill-title">Strategy & Execution</div>
+      <ul class="skill-list">
+        <li>Lead Program Execution</li>
+        <li>Scale & Automation</li>
+        <li>Process Improvement</li>
+        <li>Revenue Contribution</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section id="tools">
+  <div class="section-label">Tech Stack</div>
+  <h2 class="section-title reveal">Tools & Platforms</h2>
+
+  <div style="margin-bottom: 1.5rem;">
+    <div style="font-size:0.72rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--warm-gray);margin-bottom:0.75rem;">Lead Management</div>
+    <div class="tools-row">
+      <span class="tool-pill"><span class="tool-pill-dot"></span>Inmobius</span>
+      <span class="tool-pill"><span class="tool-pill-dot"></span>HOTS</span>
+      <span class="tool-pill"><span class="tool-pill-dot"></span>AMS</span>
+    </div>
+  </div>
+
+  <div style="margin-bottom: 1.5rem;">
+    <div style="font-size:0.72rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--warm-gray);margin-bottom:0.75rem;">Learning & Tracking</div>
+    <div class="tools-row">
+      <span class="tool-pill"><span class="tool-pill-dot"></span>WIT</span>
+      <span class="tool-pill"><span class="tool-pill-dot"></span>SCORE</span>
+      <span class="tool-pill"><span class="tool-pill-dot"></span>GDT</span>
+    </div>
+  </div>
+
+  <div style="margin-bottom: 1.5rem;">
+    <div style="font-size:0.72rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--warm-gray);margin-bottom:0.75rem;">Reporting & Analysis</div>
+    <div class="tools-row">
+      <span class="tool-pill"><span class="tool-pill-dot"></span>Microsoft Excel</span>
+      <span class="tool-pill"><span class="tool-pill-dot"></span>MIS Dashboards</span>
+      <span class="tool-pill"><span class="tool-pill-dot"></span>Funnel Analytics</span>
+    </div>
+  </div>
+
+  <div>
+    <div style="font-size:0.72rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--warm-gray);margin-bottom:0.75rem;">CRM & Platforms</div>
+    <div class="tools-row">
+      <span class="tool-pill"><span class="tool-pill-dot"></span>CRM Exposure</span>
+      <span class="tool-pill"><span class="tool-pill-dot"></span>B2B Outreach Platforms</span>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION & LANGUAGES -->
+<section id="education">
+  <div class="section-label">Background</div>
+  <h2 class="section-title reveal">Education & Languages</h2>
+  <div class="edu-lang-grid">
+    <div class="info-card reveal">
+      <div class="info-card-title">Education</div>
+      <div class="edu-degree">Bachelor of Commerce (B.Com)</div>
+      <div class="edu-uni">PES University, Bengaluru</div>
+      <div class="edu-year">2019 – 2022</div>
+    </div>
+    <div class="info-card reveal">
+      <div class="info-card-title">Languages</div>
+      <div class="lang-list">
+        <div class="lang-item">
+          <span class="lang-name">English</span>
+          <span class="lang-level">Professional</span>
+        </div>
+        <div class="lang-item">
+          <span class="lang-name">Kannada</span>
+          <span class="lang-level">Professional</span>
+        </div>
+        <div class="lang-item">
+          <span class="lang-name">Hindi</span>
+          <span class="lang-level">Fluent</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">Let's Connect</div>
+  <h2 class="section-title">Get In Touch</h2>
+  <p class="contact-sub">Open to new opportunities in B2B Growth, Lead Generation & EdTech Partnerships</p>
+  <div class="contact-links">
+    <a href="tel:+919110288549" class="contact-item">
+      <span class="contact-icon">📞</span>
+      +91-9110288549
+    </a>
+    <a href="mailto:nishakumarichotu@gmail.com" class="contact-item">
+      <span class="contact-icon">✉️</span>
+      nishakumarichotu@gmail.com
+    </a>
+    <a href="#" class="contact-item">
+      <span class="contact-icon">📍</span>
+      Bangalore, India
+    </a>
+  </div>
+</section>
+
+<footer>
+  © 2025 Nisha Puri &nbsp;·&nbsp; B2B Lead Generation & Growth Operations
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Smooth active nav highlight
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(sec => {
+      if (window.scrollY >= sec.offsetTop - 120) current = sec.getAttribute('id');
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current ? 'var(--terracotta)' : '';
+    });
+  });
+</script>
+</body>
+</html>
